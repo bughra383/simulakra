@@ -328,12 +328,19 @@ class PhishingCampaignManager:
         
         self.logger.info(f"Monitoring campaign {campaign_id} for completion (timeout: {timeout_hours}h)")
         
-        # Check every 10 minutes as specified in requirements
-        check_interval = 600  # 10 minutes
+        # Check status every minute instead of 10 minutes
+        check_interval = 60  # 1 minute
         
-        # For shorter testing, allow manual completion after 30 minutes if no new activity
+        # Calculate dynamic timeouts based on the overall timeout
+        # If timeout is less than 1 hour, use 1/3 of it for no activity timeout
+        # Otherwise use 30 minutes
+        no_activity_timeout_minutes = min(30, max(5, int(timeout_hours * 60 / 3)))
+        no_activity_timeout = timedelta(minutes=no_activity_timeout_minutes)
+        
+        self.logger.info(f"Using {no_activity_timeout_minutes} minute(s) no-activity timeout")
+        
+        # Track last activity check time
         last_activity_check = None
-        no_activity_timeout = timedelta(minutes=30)
         
         while datetime.now() < timeout_time:
             try:
@@ -358,23 +365,16 @@ class PhishingCampaignManager:
                     self.logger.info(f"Campaign {campaign_id} completed successfully")
                     return campaign
                 
-                # Check if all emails have been sent and we have some results
+                # Only check for early completion if all emails have been sent
                 if sent > 0 and sent == total:
                     # If we have activity (clicks/submissions), check for timeout
                     if clicked > 0 or submitted > 0:
                         current_time = datetime.now()
                         if last_activity_check is None:
                             last_activity_check = current_time
-                            self.logger.info(f"Campaign has activity. Starting 30-minute activity timeout.")
+                            self.logger.info(f"Campaign has activity. Starting {no_activity_timeout_minutes}-minute activity timeout.")
                         elif current_time - last_activity_check > no_activity_timeout:
-                            self.logger.info(f"No new activity for 30 minutes. Considering campaign complete.")
-                            return campaign
-                    
-                    # If no clicks/submissions yet, but all emails sent, wait a bit more
-                    elif sent == total:
-                        elapsed = datetime.now() - start_time
-                        if elapsed > timedelta(hours=1):  # After 1 hour with no activity
-                            self.logger.info(f"All emails sent, no activity after 1 hour. Considering campaign complete.")
+                            self.logger.info(f"No new activity for {no_activity_timeout_minutes} minutes. Considering campaign complete.")
                             return campaign
                 
                 time.sleep(check_interval)
@@ -695,6 +695,10 @@ def main():
             # Override timeout for testing (30 minutes instead of 24 hours)
             manager.config['campaign']['timeout_hours'] = 0.5  # 30 minutes
             manager.logger.info("Test mode: Using 30-minute timeout instead of 24 hours")
+        else:
+            # Log the configured timeout
+            timeout_hours = manager.config['campaign'].get('timeout_hours', 24)
+            manager.logger.info(f"Using configured timeout of {timeout_hours} hours from config.yaml")
         
         manager.run_monthly_campaign()
         sys.exit(0)
