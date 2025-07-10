@@ -1,7 +1,7 @@
 # GoPhish API Configuration
 gophish:
   url: "https://localhost:3333"  # GoPhish server URL
-  api_key: ""           # API key from environment variable
+  api_key: "${GOPHISH_API_KEY}"           # API key from environment variable
   verify_ssl: false                        # Set to false for self-signed certificates
 
 # Campaign Configuration
