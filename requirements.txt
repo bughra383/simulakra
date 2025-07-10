@@ -1,0 +1,15 @@
+# HTTP requests for GoPhish API
+requests>=2.32.0
+
+# Configuration and Environment
+PyYAML==6.0.1
+python-dotenv==1.0.0
+
+# Email and SMTP
+# Note: smtplib and email are part of Python standard library
+
+# Type hints (for older Python versions)
+typing-extensions==4.8.0
+
+# Optional: For better CSV handling (pandas alternative if needed)
+# pandas==2.1.4

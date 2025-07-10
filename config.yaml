@@ -1,0 +1,30 @@
+# GoPhish API Configuration
+gophish:
+  url: "https://localhost:3333"  # GoPhish server URL
+  api_key: ""           # API key from environment variable
+  verify_ssl: false                        # Set to false for self-signed certificates
+
+# Campaign Configuration
+campaign:
+  # CSV file containing target information (FirstName, LastName, Email, Position)
+  targets_csv: "targets.csv"
+  
+  # GoPhish object names (must exist in your GoPhish instance)
+  smtp_profile: "SENDING PROFILES"             # SMTP profile name
+  template: "EMAIL TEMPLATES"         # Email template name
+  landing_page: "LANDING PAGES"              # Landing page name
+  
+  # Campaign settings
+  url: "https://yourcampaignurl.com" # Target URL for phishing
+  timeout_hours: 24                       # Hours to wait for campaign completion
+  send_warning_emails: true               # Whether to send warning emails to affected users
+
+# SMTP Configuration for Warning Emails
+smtp:
+  sender_email: "your.sender@mail.org"    # From address for warning emails
+  sender_name: "FROM NAME"    # From name for warning emails
+
+# Logging Configuration
+logging:
+  level: "INFO"                           # Log level (DEBUG, INFO, WARNING, ERROR)
+  file: "phishbot.log"                   # Log file name
