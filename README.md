@@ -1,6 +1,6 @@
-# simulakra
+# Simulakra
 
-TBA.
+Simulakra is a lightweight automation tool that launches phishing campaigns via the GoPhish API. It schedules attacks, tracks interactions, and automatically sends awareness emails to users who fall for the bait. Built for realism, designed for security posture testing.
 
 ## Requirements
 
@@ -13,8 +13,8 @@ TBA.
 
 1. **Clone or download the project files**
    ```bash
-   git clone <repository-url>
-   cd gophish-automation
+   git clone git@github.com:bughra383/simulakra.git
+   cd simulakra
    ```
 
 2. **Create a virtual environment**
@@ -81,9 +81,9 @@ The CSV file must contain these columns:
 
 Before running the script, ensure your GoPhish instance has:
 
-1. **SMTP Profile named "MailgunSMTP"** (or update config.yaml)
-2. **Email Template named "UZEM_Password_Reset"** (or update config.yaml)
-3. **Landing Page named "UZEM_Login"** (or update config.yaml)
+1. **SMTP Profile named "SMTP"** (or update config.yaml)
+2. **Email Template named "Password_Reset"** (or update config.yaml)
+3. **Landing Page named "Login_Page"** (or update config.yaml)
 4. **Valid API key** with appropriate permissions
 
 ## Usage
@@ -110,12 +110,4 @@ crontab -e
 0 9 1 * * /path/to/venv/bin/python /path/to/simulakra.py >> /var/log/simulakra.log 2>&1
 ```
 
-### Testing
-
-For testing purposes, you can modify the timeout in config.yaml to a shorter duration:
-
-```yaml
-campaign:
-  timeout_hours: 1  # Wait only 1 hour for testing
-```
 
