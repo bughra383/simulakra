@@ -18,7 +18,7 @@ from pathlib import Path
 project_dir = Path(__file__).parent
 sys.path.insert(0, str(project_dir))
 
-from phishbot import PhishingCampaignManager
+from simulakra import PhishingCampaignManager
 
 def main():
     """Run demo without executing actual campaign."""
@@ -131,7 +131,7 @@ def main():
     
     print("\nReady to run actual campaigns!")
     print("\nTo run a real campaign:")
-    print("   python phishbot.py")
+    print("   python simulakra.py")
     
 
 if __name__ == "__main__":

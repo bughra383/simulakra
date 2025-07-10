@@ -18,7 +18,7 @@ project_dir = Path(__file__).parent
 sys.path.insert(0, str(project_dir))
 
 try:
-    from phishbot import PhishingCampaignManager
+    from simulakra import PhishingCampaignManager
     print("Successfully imported PhishingCampaignManager")
 except ImportError as e:
     print(f"Failed to import PhishingCampaignManager: {e}")
@@ -140,7 +140,7 @@ def main():
     print("1. Copy .env.example to .env and fill in your credentials")
     print("2. Update config.yaml with your GoPhish server details")
     print("3. Update targets.csv with your actual target list")
-    print("4. Run: python phishbot.py")
+    print("4. Run: python simulakra.py")
 
 if __name__ == "__main__":
     main()

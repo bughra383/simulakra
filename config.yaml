@@ -27,4 +27,4 @@ smtp:
 # Logging Configuration
 logging:
   level: "INFO"                           # Log level (DEBUG, INFO, WARNING, ERROR)
-  file: "phishbot.log"                   # Log file name
+  file: "simulakra.log"                   # Log file name

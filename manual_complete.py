@@ -17,7 +17,7 @@ load_dotenv()
 project_dir = Path(__file__).parent
 sys.path.insert(0, str(project_dir))
 
-from phishbot import PhishingCampaignManager
+from simulakra import PhishingCampaignManager
 
 def main():
     """Main function to manually complete a campaign."""

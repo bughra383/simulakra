@@ -95,7 +95,7 @@ Before running the script, ensure your GoPhish instance has:
 source venv/bin/activate
 
 # Run the script
-python phishbot.py
+python simulakra.py
 ```
 
 ### Automated Execution (Cron)
@@ -107,7 +107,7 @@ Add to crontab for monthly execution on the 1st at 9 AM:
 crontab -e
 
 # Add this line (adjust paths as needed)
-0 9 1 * * /path/to/venv/bin/python /path/to/phishbot.py >> /var/log/phishbot.log 2>&1
+0 9 1 * * /path/to/venv/bin/python /path/to/simulakra.py >> /var/log/simulakra.log 2>&1
 ```
 
 ### Testing

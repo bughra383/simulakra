@@ -138,7 +138,7 @@ class PhishingCampaignManager:
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
             handlers=[
-                logging.FileHandler('phishbot.log'),
+                logging.FileHandler('simulakra.log'),  # Changed from 'phishbot.log' to 'simulakra.log'
                 logging.StreamHandler(sys.stdout)
             ]
         )

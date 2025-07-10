@@ -5,7 +5,7 @@ Debug script to check campaign results and timeline data
 
 import json
 import sys
-from phishbot import PhishingCampaignManager
+from simulakra import PhishingCampaignManager
 
 def debug_campaign_results(campaign_id: int):
     """Debug campaign results by examining raw API responses."""
